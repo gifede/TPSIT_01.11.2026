@@ -16,6 +16,7 @@ public:
         titolo = std::move(titoloC);
         anno = annoC;
     }
+    virtual ~Materiale() = default;
     virtual uint8_t prestito() {
         return 0;
     }
@@ -99,7 +100,7 @@ public:
 
 int main() {
     Materiale* mat[4];
-    double mora_t;
+    double mora_t = 0;
 
     mat[0] = new Libro("L01", "I promessi sposi", 1827, 720);
     mat[1] = new DVD("D01", "Il sorpasso", 1962, 105);
@@ -110,6 +111,7 @@ int main() {
         std::cout << mat[i]->to_string() << std::endl;
         std::cout << "Mora: " << mat[i]->mora(mat[i]->prestito() +10) << " euro." << std::endl;
         mora_t += mat[i]->mora(gg_r[i]);
+        delete mat[i];
     }
     std::cout << "Mora totale: " << mora_t << " euro." << std::endl;
 }
